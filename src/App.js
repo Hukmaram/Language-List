@@ -1,24 +1,27 @@
-import logo from './logo.svg';
+import React,{useState,useEffect} from "react";
+import axios from "axios";
 import './App.css';
+import LanguageContainer from "./LanguageContainer"
 
 function App() {
+  const[languageList,setLanguageList]=useState([]);
+  useEffect(()=>{
+    axios.get('https://www.mist-one.com/pub/languages')
+    .then(response=>{
+      console.log(response)
+      console.log(response.data.data.rows)
+      setLanguageList(response.data.data.rows)
+    })
+  },[])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <React.Fragment>
+    <h1 style={{textAlign:'center'}}>Language List</h1>
+    <div className="language-container">
+        {languageList.map(language=>(
+          <LanguageContainer language={language} />
+        ))}
     </div>
+    </React.Fragment>
   );
 }
 
