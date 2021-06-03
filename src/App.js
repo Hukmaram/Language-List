@@ -2,6 +2,7 @@ import React,{useState,useEffect} from "react";
 import axios from "axios";
 import './App.css';
 import LanguageContainer from "./LanguageContainer"
+import Footer from "./Footer";
 // This is App.js
 function App() {
   const[languageList,setLanguageList]=useState([]);
@@ -21,6 +22,7 @@ function App() {
           <LanguageContainer language={language} />
         ))}
     </div>
+    <Footer />
     </React.Fragment>
   );
 }
